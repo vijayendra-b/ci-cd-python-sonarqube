@@ -9,7 +9,7 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/vijayendra-b/ci-cd-python-sonar.git'
+                git branch: 'main', url: 'https://github.com/vijayendra-b/ci-cd-python-sonarqube.git'
             }
         }
 
