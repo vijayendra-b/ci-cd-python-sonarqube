@@ -1,4 +1,4 @@
-Flow
+## Flow
 
 Developer pushes Python code to GitHub
 
@@ -12,7 +12,7 @@ Jenkins builds Docker image
 
 Docker image is pushed to Docker Hub
 
-🧰 Tools Used
+## 🧰 Tools Used
 
 Python – Sample application
 
@@ -24,9 +24,10 @@ SonarQube – Code quality & security
 
 Docker – Containerization
 
-📁 Step 1: Create Python Sample App
+## 📁 Step 1: Create Python Sample App
+
+### Project Structure
 ```
-Project Structure
 ci-cd-python-sonar/
 ├── app.py
 ├── test_app.py
@@ -36,7 +37,7 @@ ci-cd-python-sonar/
 └── sonar-project.properties
 ```
 
-app.py
+## app.py
 ```
 def add(a, b):
     return a + b
@@ -45,19 +46,19 @@ if __name__ == "__main__":
     print(add(2, 3))
 ```
 
-test_app.py
+## test_app.py
 ```
 from app import add
 
 def test_add():
     assert add(2, 3) == 5
 ```
-requirements.txt
+## requirements.txt
 ```
 pytest
 ```
 
-🌐 Step 2: Push Code to GitHub
+## 🌐 Step 2: Push Code to GitHub
 ```
 git init
 git add .
@@ -67,7 +68,7 @@ git remote add origin https://github.com/<username>/ci-cd-python-sonar.git
 git push -u origin main
 ```
 
-🐳 Step 3: Create Dockerfile
+## 🐳 Step 3: Create Dockerfile
 ```
 FROM python:3.10-slim
 WORKDIR /app
@@ -77,14 +78,14 @@ COPY . .
 CMD ["python", "app.py"]
 ```
 
-🔍 Step 4: SonarQube Configuration
+## 🔍 Step 4: SonarQube Configuration
 
-Run SonarQube (Docker – easiest)
+### Run SonarQube (Docker – easiest)
 ```
 docker run -d --name sonarqube -p 9000:9000 sonarqube:lts
 ```
 
-Access:
+### Access:
 👉 http://localhost:9000
 
 Default login: admin / admin
@@ -98,12 +99,12 @@ sonar.language=py
 sonar.python.version=3
 ```
 
-Generate SonarQube Token:
+### Generate SonarQube Token:
 ```
 SonarQube → My Account → Security → Generate Token
 ```
 
-⚙️ Step 5: Jenkins Setup
+## ⚙️ Step 5: Jenkins Setup
 Install Jenkins Plugins
 
 Git
@@ -114,7 +115,7 @@ Docker Pipeline
 
 SonarQube Scanner
 
-Configure SonarQube in Jenkins
+### Configure SonarQube in Jenkins
 ```
 Manage Jenkins → System → SonarQube Servers
 Name: SonarQube
@@ -122,7 +123,7 @@ URL: http://localhost:9000
 Token: (Sonar token)
 ```
 
-📜 Step 6: Jenkinsfile (Pipeline as Code)
+## 📜 Step 6: Jenkinsfile (Pipeline as Code)
 ```
 pipeline {
     agent any
@@ -180,7 +181,7 @@ pipeline {
 }
 ```
 
-🔐 Step 7: Jenkins Credentials
+## 🔐 Step 7: Jenkins Credentials
 
 Add credentials in Jenkins:
 
@@ -188,7 +189,7 @@ Docker Hub username/password
 
 ID: dockerhub-creds
 
-🚀 Step 8: Run the Pipeline
+## 🚀 Step 8: Run the Pipeline
 
 Create Pipeline Job in Jenkins
 
@@ -198,7 +199,7 @@ Choose Git & repo URL
 
 Click Build Now
 
-✅ Final Output
+## ✅ Final Output
 ```
 ✔ Code tested with pytest
 ✔ SonarQube quality gate report
