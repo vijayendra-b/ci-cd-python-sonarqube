@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "yourdockerhub/python-ci-cd"
+        DOCKER_IMAGE = "vijayendra1/ci-cd-python-sonarqube"
     }
 
     stages {
 
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/<username>/ci-cd-python-sonar.git'
+                git branch: 'main', url: 'https://github.com/vijayendra-b/ci-cd-python-sonar.git'
             }
         }
 
@@ -39,9 +39,9 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-creds',
-                    usernameVariable: 'USER',
-                    passwordVariable: 'PASS'
+                    credentialsId: 'b799765c-9aab-4075-8537-541d450e7f9d',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
                 )]) {
                     sh '''
                     echo $PASS | docker login -u $USER --password-stdin
