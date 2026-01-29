@@ -16,11 +16,14 @@ pipeline {
         stage('Install Dependencies & Test') {
             steps {
                 sh '''
+                python3 --version
+                pip3 --version
                 pip3 install -r requirements.txt
-                pytest
+                python3 -m pytest
                 '''
             }
         }
+
 
         stage('SonarQube Analysis') {
             steps {
